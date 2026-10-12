@@ -1,0 +1,29 @@
+title: Crónica de Esthelm
+description: Personajes, grupos, lugares y sesiones de la campaña de Innworld, solo con lo que vuestros personajes saben.
+footer: Cuaderno de campaña de Innworld.
+through_session: 9
+headline: Esthelm sigue en pie.
+lead: La ciudad sobrevivió al asedio, pero dos de cada tres edificios siguen en ruinas. Aquí está todo lo que sabéis de la gente, los grupos y los sitios que os rodean.
+hero_cards: [magnolia-reinhart, vessa-galesinger, erin-solstice, frasi, klbkch]
+leads_intro: Lo que tenéis entre manos ahora mismo.
+doors:
+  personajes: Quién es quién, con lo que sabéis de cada uno.
+  grupos: Gremios, facciones y bandos.
+  lugares: Esthelm, sus sitios y vuestra casa.
+  cronica: Lo que ha pasado, sesión a sesión.
+leads:
+  - title: La granja a las afueras
+    text: Un registro nuevo de la Guardia dice que hay suministros guardados en una granja fuera de Esthelm, y los propios guardias lo encontraron raro. Terminasteis la última sesión de camino a investigarla.
+    related: [grupos/guardia-de-esthelm, personajes/vessa-galesinger]
+  - title: Los falsos ataques goblin
+    text: Tenéis pruebas de que al menos parte de los ataques «goblin» a las caravanas los cometen bandidos humanos, y de que eligen caravanas sin escolta. Tres de ellos están presos en Celum. No sabéis quién les pasa la información. Además, Charley ha visto que las cuentas del Gremio de Mercaderes no cuadran.
+    related: [grupos/gremio-de-mercaderes, personajes/orsten, personajes/elias-maren]
+  - title: Redhat
+    text: El joven goblin del sombrero rojo se marchó con comida y agua después de que Amaia lo dejara ir. Nadie sabe adónde fue ni si volverá a acercarse.
+    related: [personajes/redhat]
+  - title: Cristales de canción
+    text: Telisa pagará la importación de cristales de Wistram para que Sonia grabe canciones, y se quedará con parte de los beneficios. Aún no hay cantidades ni plazos cerrados, y no ha llegado ningún envío.
+    related: [personajes/telisa, grupos/coro-de-sonia]
+  - title: La clave con BlackMage
+    text: Charley y BlackMage, en Wistram, quieren montar un cifrado sencillo con un número primo y claves pública y privada. De momento es solo un acuerdo; no hay algoritmo ni mensajes cifrados.
+    related: [personajes/telisa]
