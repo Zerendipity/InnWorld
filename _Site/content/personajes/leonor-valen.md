@@ -13,4 +13,4 @@ Lleva El Candil Tranquilo y es la única alquimista que funciona ahora en Esthel
 
 Ethan la rescató en su primera aventura. Ayudó a Sonia a desarrollar cuerdas sintéticas para guitarra y ahora ayuda a Carlos a purificar azúcar a partir de fruta.
 
-Esteban estaba fuera reuniendo ingredientes cuando Esthelm entró en crisis y no pudo volver durante el asedio. Regresó herido: le tiemblan las manos y ya no tiene precisión para la alquimia más exigente. Ahora es el mentor de Leonor, su teórico, su control de calidad y su comprador de ingredientes.
+Esteban estaba fuera reuniendo ingredientes cuando Esthelm entró en crisis y no pudo volver durante el asedio. Regresó herido: le tiemblan las manos y, por ahora, no tiene precisión para la alquimia más exigente, aunque se espera que se recuperen con el tiempo. Ahora es el mentor de Leonor, su teórico, su control de calidad y su comprador de ingredientes.
