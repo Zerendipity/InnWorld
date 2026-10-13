@@ -7,8 +7,6 @@ groups: [guardia-de-esthelm]
 places: [esthelm]
 met_by: [Amaia, Ethan]
 sessions: [sesion-7]
-unknown:
-  - Qué le ha costado a ella personalmente el asedio.
 ---
 Aceptó la propuesta de Ethan de formar a los guardias en extinción de incendios y rescate, y pagó una pequeña paga mientras probaban el programa. Reconoció el valor de la ropa protectora de Amaia: la Guardia encargó más de veinte conjuntos.
 

@@ -6,8 +6,6 @@ role: Joven goblin
 card: "NPC Cards/Set 5/Redhat.png"
 met_by: [Amaia]
 sessions: [sesion-8]
-unknown:
-  - Adónde fue, a qué tribu pertenece y si volverá a acercarse.
 ---
 Lo encontrasteis durante la investigación de la emboscada a la caravana. Lleva un sombrero rojo demasiado grande. Se mostró asustadizo y habló poco, pero no huyó enseguida.
 

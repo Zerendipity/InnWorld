@@ -8,9 +8,6 @@ groups: [gremio-de-magos, faccion-ullsinoi]
 places: [esthelm]
 met_by: [Amaia, Carlos, Charley, Ethan, Sonia]
 sessions: [sesion-2-4, sesion-7, sesion-9]
-unknown:
-  - Cuál es exactamente la disputa política dentro de Wistram.
-  - Qué miembros de Ullsinoi saben qué sobre vosotros.
 ---
 Graduada de Wistram, es la maestra del Gremio de Magos de Esthelm y la profesora de Charley. Es vuestra guía principal por la cultura y la magia locales.
 

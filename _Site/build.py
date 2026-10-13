@@ -318,13 +318,6 @@ def page_personajes_index():
           "Quién es quién en Esthelm."))
 
 
-def gaps_html(m, root):
-    if not m.get("unknown"):
-        return ""
-    return ('<h2 class="small">Lo que aún no sabéis</h2><ul class="gaps">' +
-            "".join(f"<li>{md_inline(u, root)}</li>" for u in m["unknown"]) + "</ul>")
-
-
 def meta_row(label, value):
     return f"<dt>{esc(label)}</dt><dd>{value}</dd>" if value else ""
 
@@ -348,7 +341,9 @@ def page_personaje(e):
         meta_row("Lo conoce", esc(", ".join(m.get("met_by", [])))),
         meta_row("Aparece en", sessions),
     ])
-    gaps = gaps_html(m, root)
+    story = ""
+    if m.get("story"):
+        story = f'<h2 class="small">Su historia</h2><div class="prose story">{md(m["story"], root)}</div>'
     body = f"""
 <article class="wrap profile">
   <aside>{art}</aside>
@@ -359,7 +354,7 @@ def page_personaje(e):
     <dl class="meta">{rows}</dl>
     <h2 class="small">Lo que sabéis</h2>
     <div class="prose">{md(e.body, root)}</div>
-    {gaps}
+    {story}
   </div>
 </article>
 """
@@ -399,7 +394,6 @@ def page_grupo(g):
   <h1>{esc(g.title)}</h1>
   <p class="tagline">{esc(g.meta.get("tagline", ""))}</p>
   <div class="prose">{md(g.body, root)}</div>
-  {gaps_html(g.meta, root)}
   {mem}
 </article>
 """

@@ -1,10 +1,6 @@
 ---
 title: Ullsinoi
 tagline: Una facción pequeña y flexible de Wistram, a la que Telisa lo cuenta todo.
-unknown:
-  - Quiénes forman parte de ella y quién la dirige.
-  - Quién sabe que sois terrícolas.
-  - Qué ideas o tecnologías de la Tierra conoce cada uno.
 ---
 [[Telisa]] pertenece a Ullsinoi y es su contacto local. Os lo dijo con franqueza: informa de todo lo que le contáis y, a cambio, os responde con sinceridad.
 

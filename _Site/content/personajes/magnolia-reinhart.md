@@ -5,8 +5,6 @@ role: Noble
 card: "NPC Cards/Set 1/Magnolia Reinhart.png"
 met_by: [Amaia, Carlos, Charley, Ethan, Sonia]
 sessions: [sesion-5]
-unknown:
-  - Si es vuestra amiga, vuestra enemiga o vuestra protectora.
 ---
 Os localizó como terrícolas y se interesó por el grupo después del trueno de Sonia en el Ayuntamiento y de que se difundiera información sobre la pólvora. Envió a Ressa y a Reynold a llevaros a su finca.
 
