@@ -1,6 +1,9 @@
 ---
 title: Guardia de Esthelm
 tagline: La guardia de la ciudad, diezmada y reorganizándose.
+unknown:
+  - Cuántos guardias quedan y cómo está organizada ahora.
+  - Quién metió el registro de suministros de la granja.
 ---
 Es una de vuestras relaciones institucionales más fuertes en la zona. La dirige la capitana [[Vessa Galesinger]]. Tomas, antiguo vicecapitán y oficial importante, murió. Ahora la Guardia valora la formación de rescate de Ethan y la ropa protectora de Amaia.
 

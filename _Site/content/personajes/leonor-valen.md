@@ -6,6 +6,8 @@ class: Alchemist
 card: "NPC Cards/Set 1/Leonor Rishaw.png"
 places: [esthelm]
 met_by: [Ethan, Sonia, Carlos]
+unknown:
+  - Cuánto le afectará a largo plazo tomar tantas pociones.
 ---
 Lleva El Candil Tranquilo y es la única alquimista que funciona ahora en Esthelm. Empezó como aprendiza de su padre, Esteban, y mientras él estuvo fuera se convirtió en la alquimista de la ciudad. Va acelerada de tomar pociones de resistencia una y otra vez para alargar su jornada.
 
