@@ -1,5 +1,5 @@
 ---
-title: Telisa
+title: Telisa Mistwalker
 tagline: Maga semielfa, maestra de Charley y vuestra guía por la cultura y la magia de Innworld.
 race: Semielfa
 role: Maestra del Gremio de Magos
