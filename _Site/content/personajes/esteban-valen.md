@@ -3,6 +3,7 @@ title: Esteban Valen
 tagline: El alquimista veterano de El Candil Tranquilo, recién vuelto a Esthelm.
 role: Alquimista, dueño de El Candil Tranquilo
 groups: []
+card: "NPC Cards/Esteban Valen.png"
 places: [esthelm]
 unknown:
   - Por qué le tiemblan las manos.
