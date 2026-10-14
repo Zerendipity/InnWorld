@@ -216,7 +216,8 @@ def tile(e, root):
     groups = " ".join(e.meta.get("groups", []))
     hay = sort_key(" ".join([e.title, e.meta.get("tagline", ""), e.meta.get("role", ""),
                              " ".join(e.meta.get("aliases", []))]))
-    art = f'<span class="art {kind}">{img_tag(name, root)}</span>' if name else '<span class="art none"></span>'
+    art = (f'<span class="art {kind}">{img_tag(name, root)}</span>' if name else
+           f'<span class="art none"><span class="ph">{esc(e.title[:1])}</span></span>')
     return (f'<a class="tile" href="{root}{e.path}" data-groups="{groups}" data-text="{esc(hay)}">'
             f'{art}<span class="name">{esc(e.title)}</span>'
             f'<span class="role">{esc(e.meta.get("role", ""))}</span></a>')
@@ -333,7 +334,7 @@ def page_personaje(e):
     root = "../../"
     name, kind = image_for(e)
     m = e.meta
-    art = ""
+    art = f'<div class="art big none"><span class="ph">{esc(e.title[:1])}</span></div>'
     if name:
         art = f'<div class="art big {kind}">{img_tag(name, root, eager=True)}</div>'
     cls = f'<span class="classtag br">{esc(m["class"])}</span>' if m.get("class") else ""

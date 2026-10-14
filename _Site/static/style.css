@@ -225,3 +225,8 @@ a.ref:hover { color: var(--ember); }
   .doors a, .doors.rows a { grid-template-columns: 1fr; }
   .d-count { justify-self: start; }
 }
+
+/* Sin ilustración: marco con inicial */
+.art.none { border: 3px solid var(--parch); border-radius: 9px; background: var(--surface-2); box-shadow: 0 8px 10px rgba(0, 0, 0, .18);
+  display: flex; align-items: center; justify-content: center; }
+.art.none .ph { font-family: var(--serif, Georgia, serif); font-style: italic; font-size: clamp(3rem, 9vw, 5.5rem); color: var(--muted, #6b7a8c); opacity: .55; }
