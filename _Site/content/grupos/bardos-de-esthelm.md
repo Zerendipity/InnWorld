@@ -8,4 +8,4 @@ Sonia ha notado lo bien que se apilan sus voces en armonías, y lo distintos que
 
 Solo cuatro de ellos son bardos: Garrick es operario de alcantarillas. Por ahora no son un grupo organizado: Sonia todavía no ha decidido qué hacer con ellos.
 
-Durante el asedio, cuatro de ellos (Lázaro, Marek, Tovin e Iven) fueron los músicos que Sonia colocó por Esthelm para la actuación de Resonancia de Conjunto.
+Durante el asedio, cuatro de ellos (Lázaro, Marek, Tovin e Iven) fueron los bardos que Sonia colocó al norte, este, oeste y sur de Esthelm para la actuación de Resonancia de Conjunto. Garrick se unió al grupo después, aunque no se considere bardo.

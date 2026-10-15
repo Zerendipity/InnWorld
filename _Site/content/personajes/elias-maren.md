@@ -16,7 +16,7 @@ story: |
 unknown:
   - Qué pasó de verdad con el cargamento de madera que no llegó.
 ---
-Carpintero casado con Inés y padre de dos niñas, Julia y Paloma. Una de ellas es la niña a la que Sonia salvó al llegar a Esthelm, cuando la atrapó al caer de un andamio; desde entonces hay un vínculo entre Sonia y la familia.
+Carpintero casado con Inés y padre de dos niñas, Julia y Paloma. La menor, Paloma, es la niña a la que Sonia salvó al llegar a Esthelm, cuando la atrapó al caer de un andamio; desde entonces hay un vínculo entre Sonia y la familia.
 
 Construyó la plataforma de madera que Sonia usó para su experimento del trueno en el Ayuntamiento y sigue ayudando con sus proyectos musicales, cada vez más raros. A petición de Sonia fabrica guitarras a partir de su diseño, adaptándolas a los materiales y a la carpintería locales.
 

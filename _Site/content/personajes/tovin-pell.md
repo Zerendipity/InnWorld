@@ -19,4 +19,4 @@ Humano de mediados de la veintena. Toca la flauta y el silbato y canta con una v
 
 Callado y atento, menos teatral que los otros, es el músico más cerebral. Su afinación limpia y su registro medio-alto suave lo hacen el cantante de armonías más preciso del grupo. Tiene muy buen oído y, después de Lázaro, es quien mejor lee la notación de la Tierra que enseña Sonia: la trata casi como un mapa, anotando con cuidado tiempos y entradas.
 
-Durante el asedio fue uno de los cinco relevos de Resonancia de Conjunto.
+Durante el asedio fue uno de los cuatro relevos de Resonancia de Conjunto, colocados al norte, este, oeste y sur de Esthelm.

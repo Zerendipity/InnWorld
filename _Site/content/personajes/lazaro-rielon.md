@@ -19,4 +19,4 @@ Humano de unos veintitantos años, delgado y atractivo, con piel aceitunada, pel
 
 Conoció a Sonia después de su primer concierto y fue el primer bardo local al que ella formó. Como bardo convencional supera con mucho a Sonia en proyección, repertorio, improvisación, narración y lectura del público, y devora todo lo que ella puede enseñarle de música de la Tierra y notación moderna. La trata como a una especialista con una tradición desconocida, no como a una bardo superior.
 
-Carismático sin imponerse, hace que la gente se sienta escuchada y recordada: es líder natural, fuente de historias locales y aliado leal. Fue uno de los cinco músicos que Sonia organizó durante el asedio para la actuación de Resonancia de Conjunto.
+Carismático sin imponerse, hace que la gente se sienta escuchada y recordada: es líder natural, fuente de historias locales y aliado leal. Fue uno de los cuatro bardos que Sonia organizó durante el asedio para la actuación de Resonancia de Conjunto, colocados al norte, este, oeste y sur de Esthelm.

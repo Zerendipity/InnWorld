@@ -19,4 +19,4 @@ Humano de mediados de la veintena, violinista, con una voz de barítono grave al
 
 Es enérgico, pícaro e improvisador. Aprende una melodía de oído al instante, no para de marcar ritmos y convierte los errores en bromas o en variaciones. Su voz es menos pulida que la de Lázaro o la de Tovin, pero cálida y firme, y llena el hueco entre sus voces agudas y el bajo extremo de Garrick.
 
-Le atrajeron los estribillos pegadizos de la música de Sonia y se quedó por el reto de mezclarlos con las costumbres de actuación de Innworld. Su encanto problemático no esconde crueldad: cuando la actuación importa, es de fiar. Fue uno de los cinco músicos de Resonancia de Conjunto.
+Le atrajeron los estribillos pegadizos de la música de Sonia y se quedó por el reto de mezclarlos con las costumbres de actuación de Innworld. Su encanto problemático no esconde crueldad: cuando la actuación importa, es de fiar. Fue uno de los cuatro bardos de Resonancia de Conjunto, colocados al norte, este, oeste y sur de Esthelm.
