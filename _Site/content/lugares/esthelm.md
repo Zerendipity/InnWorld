@@ -18,7 +18,7 @@ sites:
   - name: Plaza central
     text: Tiene una fuente. Durante la incursión, la gente se quedó a su alrededor. No sabéis cómo está ahora.
   - name: Casa de Curación
-    text: Casa de curación en funcionamiento. Trabaja aquí Borin Stonehand, un curandero humano. Carlos lo conoció al empezar a visitarla para aprender sobre Innworld y atender a pacientes graves que no podían permitirse pociones de curación caras.
+    text: Casa de curación en funcionamiento. Trabaja aquí [[borin-stonehand|Borin Stonehand]], un curandero humano. Carlos lo conoció al empezar a visitarla para aprender sobre Innworld y atender a pacientes graves que no podían permitirse pociones de curación caras.
   - name: Mercado de Esthelm
     text: Sabéis que existe, pero aún no lo habéis explorado.
   - name: Alcantarillas

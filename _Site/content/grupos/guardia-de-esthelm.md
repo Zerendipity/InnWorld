@@ -13,4 +13,4 @@ Sigue diezmada y reorganizándose. Personal y apoyo de Liscor y Celum cubren los
 
 **Un registro raro.** Un registro nuevo de suministros dice que material de la Guardia está guardado en una granja fuera de Esthelm. Los guardias lo encontraron extraño y vosotros fuisteis a investigarlo.
 
-Mike, un panadero que también es mago, era a quien llamaba la ciudad en los incendios porque conocía [Water Jet] y el hechizo poco común [Dead Air]. No trabaja para el Gremio de Magos.
+[[mike-calder|Mike]], un panadero que también es mago, era a quien llamaba la ciudad en los incendios porque conocía [Water Jet] y el hechizo poco común [Dead Air]. No trabaja para el Gremio de Magos.
