@@ -2,6 +2,8 @@
 title: Esthelm
 order: 1
 tagline: Vuestro primer hogar en Innworld, malherido pero en pie.
+map: City Maps/Esthelm.png
+map_alt: "Mapa ilustrado de Esthelm: la ciudad amurallada y circular, cruzada de norte a sur por el río, con el Ayuntamiento y la plaza del mercado en el centro, las sedes de los gremios y el cuartel de la Guardia, la Puerta Norte hacia Celum, la Puerta Sur hacia Liscor y la Puerta Oeste hacia las minas."
 sites:
   - name: La Caldera de Cobre
     text: Posada de [[Frasi]], un Drake. Restaurada por completo tras el asedio y abierta otra vez. Garrick canta aquí con Sonia.

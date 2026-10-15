@@ -15,6 +15,9 @@
   --ember: #f2a65a;
   --on-sys: #08131f;
   --parch: #c9a56a;
+  /* Tonos del logo: crema de las letras y oro del marco */
+  --head: #f6e9c6;
+  --btn: #f1cc6c;
   --shadow: 0 14px 22px rgba(0, 0, 0, .45);
   --serif: "Alegreya", Georgia, "Times New Roman", serif;
   --sans: "Alegreya Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -31,6 +34,8 @@
     --sys: #1b57ae;
     --ember: #a35410;
     --on-sys: #ffffff;
+    --head: #16202c;
+    --btn: #1b57ae;
     --shadow: 0 10px 16px rgba(30, 50, 70, .28);
     color-scheme: light;
   }
@@ -73,6 +78,18 @@ a.br:hover::after, .chip:hover::after { margin-left: .34em; color: var(--ember);
 .top nav a:hover { color: var(--text); }
 .top nav a.on { color: var(--text); font-weight: 700; }
 
+/* Logo de la campaña (The World We Make). Pequeño en las páginas interiores,
+   grande y centrado en la portada. */
+.top:has(.mast.logo) { align-items: center; }
+.mast.logo { display: block; line-height: 0; transition: transform .2s ease, filter .2s ease; }
+.mast.logo img { display: block; width: 230px; height: auto; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .35)); }
+.mast.logo:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.top-home { flex-direction: column; align-items: center; gap: 1.1rem; padding: clamp(1rem, 3vw, 2rem) 0 1.2rem; }
+.top-home .mast.logo img { width: min(900px, 100%); filter: drop-shadow(0 16px 26px rgba(0, 0, 0, .5)); }
+.top-home .mast.logo:hover { transform: none; filter: none; }
+.top-home nav { justify-content: center; }
+.home .hero { margin-top: clamp(1.8rem, 5vw, 3.6rem); }
+
 /* ---- portada ---- */
 .hero {
   width: min(1180px, 100% - 2rem);
@@ -81,19 +98,21 @@ a.br:hover::after, .chip:hover::after { margin-left: .34em; color: var(--ember);
 }
 .hero h1 {
   font: italic 900 clamp(3.1rem, 7.4vw, 6.4rem)/.9 var(--serif);
-  letter-spacing: -.02em; margin: 0 0 1.4rem; text-wrap: balance;
+  letter-spacing: -.02em; margin: 0 0 1.4rem; text-wrap: balance; color: var(--head);
 }
 .lead { font-size: 1.32rem; line-height: 1.5; max-width: 34ch; margin: 0 0 1.8rem; color: var(--dim); }
 .actions { display: flex; flex-wrap: wrap; gap: .8rem; margin: 0; }
 .btn {
   display: inline-block; padding: .72rem 1.3rem; border-radius: 6px; text-decoration: none;
-  font: 700 1.02rem/1.2 var(--sans); background: var(--sys); color: var(--on-sys); border: 1px solid var(--sys);
+  font: 700 1.02rem/1.2 var(--sans); background: var(--btn); color: var(--on-sys); border: 1px solid var(--btn);
 }
 .btn:hover { background: var(--ember); border-color: var(--ember); color: #1b1006; }
 .btn.ghost { background: transparent; color: var(--text); border-color: var(--line); }
 .btn.ghost:hover { border-color: var(--ember); color: var(--ember); background: transparent; }
 
-.fan { position: relative; width: 100%; max-width: 640px; justify-self: end; aspect-ratio: 1 / .66; }
+/* Las cartas exteriores giran ±9° y sobresalen ~7% por cada lado: el abanico
+   ocupa el 86% de su columna y va centrado para que nada se salga de la página. */
+.fan { position: relative; width: 86%; max-width: 560px; justify-self: center; aspect-ratio: 1 / .66; }
 .fan a {
   position: absolute; bottom: 0; left: calc(var(--x) * 1%); width: 34%; z-index: var(--z);
   transform-origin: 50% 115%;
@@ -118,7 +137,7 @@ a.br:hover::after, .chip:hover::after { margin-left: .34em; color: var(--ember);
 .block h2 { font: 700 clamp(1.7rem, 3.2vw, 2.3rem)/1.1 var(--serif); margin: 0 0 .7rem; }
 .intro { max-width: 58ch; color: var(--dim); font-size: 1.12rem; margin: 0 0 1.4rem; }
 
-.leads { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 1.8rem 2.2rem;
+.leads { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; gap: 1.8rem 2.2rem; align-items: start;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr)); }
 .leads li { border-left: 2px solid var(--sys); padding-left: 1.1rem; }
 .leads h3 { font: 700 1.3rem/1.2 var(--serif); margin: 0 0 .35rem; }
@@ -141,7 +160,7 @@ a.br:hover::after, .chip:hover::after { margin-left: .34em; color: var(--ember);
 
 /* ---- listas y filtros ---- */
 .page-head { margin-top: clamp(2rem, 5vw, 3.5rem); }
-h1 { font: italic 900 clamp(2.5rem, 5.6vw, 4.4rem)/1 var(--serif); letter-spacing: -.015em; margin: 0 0 .6rem; text-wrap: balance; }
+h1 { color: var(--head); font: italic 900 clamp(2.5rem, 5.6vw, 4.4rem)/1 var(--serif); letter-spacing: -.015em; margin: 0 0 .6rem; text-wrap: balance; }
 .filters { display: grid; gap: .9rem; margin-block: .6rem 2rem; }
 .search input {
   width: min(100%, 26rem); padding: .65rem .9rem; border-radius: 6px; border: 1px solid var(--line);
@@ -177,6 +196,7 @@ h1 { font: italic 900 clamp(2.5rem, 5.6vw, 4.4rem)/1 var(--serif); letter-spacin
 .art.big { max-width: 340px; }
 .art.big.card img { filter: drop-shadow(var(--shadow)); }
 .crumb { margin: 0 0 1rem; font: 500 .98rem var(--sans); }
+.profile > .crumb { grid-column: 1 / -1; margin: 0 0 -.4rem; }
 .tagline { font: italic 400 1.35rem/1.4 var(--serif); color: var(--dim); margin: .2rem 0 1.4rem; max-width: 44ch; }
 .meta { display: grid; grid-template-columns: max-content 1fr; margin: 1.4rem 0 2rem; max-width: 38rem; border-bottom: 1px solid var(--line); }
 .meta dt, .meta dd { margin: 0; padding: .6rem 0; border-top: 1px solid var(--line); }
@@ -218,7 +238,11 @@ a.ref:hover { color: var(--ember); }
 /* ---- móvil ---- */
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
-  .fan { justify-self: start; max-width: 520px; }
+  .fan { max-width: 480px; }
+  .mast.logo img { width: 190px; }
+  .top nav { gap: 0 1.3rem; }
+  .top nav a, .chip { padding: .6rem 0; }
+  .chips { column-gap: 1.1rem; row-gap: 0; }
   .profile { grid-template-columns: 1fr; }
   .profile aside { position: static; }
   .art.big { max-width: 230px; }
@@ -263,3 +287,19 @@ a.ref:hover { color: var(--ember); }
 /* ---- imagen de grupo ---- */
 .group-art { margin: 1.4rem 0 1.6rem; max-width: 640px; }
 .group-art img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+
+/* ---- mapa de ciudad ---- */
+.citymap { margin: 1.4rem 0 2rem; max-width: 900px; }
+.citymap a { display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.citymap img { display: block; width: 100%; height: auto; transition: transform .35s ease; }
+.citymap a:hover img { transform: scale(1.015); }
+.citymap figcaption { font: 400 .95rem var(--sans); color: var(--dim); margin-top: .55rem; }
+
+/* ---- página en construcción ---- */
+.wip { max-width: 40rem; margin: 1.6rem 0 2rem; padding: 1.3rem 1.4rem; border: 1px dashed var(--parch); border-radius: 10px; background: var(--surface); }
+.wip-tag { margin: 0 0 .4rem; font: 700 1.05rem var(--sans); color: var(--ember); }
+.wip p:last-child { margin: 0; color: var(--dim); }
+
+.wip-banner { margin: 1.4rem 0 2.2rem; max-width: 900px; }
+.wip-banner img { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.wip-banner figcaption { margin-top: .9rem; color: var(--dim); max-width: 60ch; }

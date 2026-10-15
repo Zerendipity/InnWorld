@@ -82,6 +82,22 @@ def load_entries():
 ENTRIES = load_entries()
 SITE = yaml.safe_load((CONTENT / "site.yml").read_text(encoding="utf-8"))
 
+# Secciones ocultas (site.yml → hidden: [cronica]): no se generan, no salen en el
+# menú y cualquier enlace hacia ellas se escribe como texto plano.
+HIDDEN = set(SITE.get("hidden") or [])
+unknown = HIDDEN - set(SECTIONS)
+if unknown:
+    print(f"ERROR: secciones ocultas desconocidas: {sorted(unknown)}", file=sys.stderr)
+    sys.exit(1)
+NAV = {k: v for k, v in SECTIONS.items() if k not in HIDDEN}
+COUNT_WORDS = {
+    "personajes": ("personaje", "personajes"),
+    "grupos": ("grupo", "grupos"),
+    "lugares": ("lugar", "lugares"),
+    "cronica": ("sesión", "sesiones"),
+    "biblioteca": ("libro", "libros"),
+}
+
 by_section = {s: [e for (sec, _), e in ENTRIES.items() if sec == s] for s in SECTIONS}
 for s in ("personajes", "grupos"):
     by_section[s].sort(key=lambda e: sort_key(e.title))
@@ -123,6 +139,39 @@ def make_webp(src_rel, dst_name, width):
     return dst_name
 
 
+LOGO_WIDTHS = (480, 960, 1600)
+
+
+def make_logo():
+    """Logo de la campaña: varias anchuras en webp (con transparencia) y una
+    imagen 1200x630 para la vista previa al compartir el enlace."""
+    src = SITE.get("logo")
+    if not src:
+        return False
+    names = [make_webp(src, f"site-logo-{w}.webp", w) for w in LOGO_WIDTHS]
+    og = MEDIA / "site-og.jpg"
+    srcfile = ASSETS / src
+    if srcfile.exists() and (not og.exists() or og.stat().st_mtime < srcfile.stat().st_mtime):
+        logo = Image.open(srcfile).convert("RGBA")
+        W, H = 1200, 630
+        w = 1100
+        logo = logo.resize((w, round(logo.height * w / logo.width)), Image.LANCZOS)
+        bg = Image.new("RGBA", (W, H), (18, 27, 39, 255))
+        bg.alpha_composite(logo, ((W - logo.width) // 2, (H - logo.height) // 2))
+        bg.convert("RGB").save(og, "JPEG", quality=86, optimize=True)
+        print(f"  imagen site-og.jpg ({og.stat().st_size // 1024} KB)")
+    return bool(names)
+
+
+def logo_img(root, big=False):
+    alt = esc(SITE.get("logo_alt", SITE["title"]))
+    srcset = ", ".join(f"{root}img/site-logo-{w}.webp {w}w" for w in LOGO_WIDTHS)
+    sizes = "(max-width: 940px) calc(100vw - 2rem), 900px" if big else "240px"
+    return (f'<img src="{root}img/site-logo-{960 if big else 480}.webp" srcset="{srcset}" '
+            f'sizes="{sizes}" alt="{alt}" width="2172" height="724" decoding="async"'
+            f'{" fetchpriority=high" if big else ""}>')
+
+
 def image_for(e):
     """Devuelve (nombre_archivo, tipo) para la ilustración principal de una ficha."""
     if e.meta.get("card"):
@@ -137,6 +186,8 @@ WIKI = re.compile(r"\[\[([^\]|]+)(?:\|([^\]]+))?\]\]")
 
 
 def link_to(e, root, label=None):
+    if e.section in HIDDEN:
+        return esc(label or e.title)
     return f'<a class="ref" href="{root}{e.path}">{esc(label or e.title)}</a>'
 
 
@@ -171,10 +222,28 @@ FONTS = ("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900
 def layout(title, body, root, active=None, desc=None, cls=""):
     full = f"{title} · {SITE['title']}" if title else SITE["title"]
     desc = desc or SITE["description"]
+    home = "home" in cls.split()
+    home_href = root or "./"
+    if SITE.get("logo"):
+        mast = (f'<a class="mast logo{" big" if home else ""}" href="{home_href}">'
+                f'{logo_img(root, big=home)}<span class="sr">{esc(SITE["title"])}</span></a>')
+    else:
+        mast = f'<a class="mast" href="{home_href}">{esc(SITE["title"])}</a>'
+    og = ""
+    if SITE.get("base_url") and SITE.get("logo"):
+        base = SITE["base_url"].rstrip("/") + "/"
+        og = (f'<meta property="og:type" content="website">\n'
+              f'<meta property="og:site_name" content="{esc(SITE["title"])}">\n'
+              f'<meta property="og:title" content="{esc(full)}">\n'
+              f'<meta property="og:description" content="{esc(desc)}">\n'
+              f'<meta property="og:image" content="{base}img/site-og.jpg">\n'
+              f'<meta property="og:image:width" content="1200">\n'
+              f'<meta property="og:image:height" content="630">\n'
+              f'<meta name="twitter:card" content="summary_large_image">\n')
     nav = "".join(
         f'<a class="br{" on" if k == active else ""}" href="{root}{k}/"'
         f'{" aria-current=page" if k == active else ""}>{esc(v)}</a>'
-        for k, v in SECTIONS.items()
+        for k, v in NAV.items()
     )
     return f"""<!doctype html>
 <html lang="es">
@@ -184,7 +253,7 @@ def layout(title, body, root, active=None, desc=None, cls=""):
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="{esc(desc)}">
 <title>{esc(full)}</title>
-<link rel="icon" href="{FAVICON}">
+{og}<link rel="icon" href="{FAVICON}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="{FONTS}">
@@ -192,8 +261,8 @@ def layout(title, body, root, active=None, desc=None, cls=""):
 </head>
 <body class="{cls}">
 <a class="skip" href="#contenido">Saltar al contenido</a>
-<header class="top">
-  <a class="mast" href="{root or './'}">{esc(SITE['title'])}</a>
+<header class="top{" top-home" if home else ""}">
+  {mast}
   <nav aria-label="Secciones">{nav}</nav>
 </header>
 <main id="contenido">
@@ -252,20 +321,38 @@ def page_home():
             rel.append(link_to(get(sec, slug), root))
         relp = f'<p class="rel">Relacionado: {", ".join(rel)}</p>' if rel else ""
         leads.append(f'<li><h3>{esc(lead["title"])}</h3><p>{md_inline(lead["text"], root)}</p>{relp}</li>')
-    last = by_section["cronica"][0]
-    counts = {k: len(v) for k, v in by_section.items()}
+    def count_label(k):
+        n = len(by_section[k])
+        one, many = COUNT_WORDS[k]
+        return f"{n} {one if n == 1 else many}"
     doors = "".join(
         f'<li><a href="{k}/"><span class="d-name br">{esc(SECTIONS[k])}</span>'
         f'<span class="d-text">{esc(SITE["doors"][k])}</span>'
-        f'<span class="d-count">{counts[k]}</span></a></li>' for k in SECTIONS)
-    first_par = md(last.body, root).split("</p>")[0] + "</p>"
+        f'<span class="d-count">{esc(count_label(k))}</span></a></li>' for k in NAV)
+    if "cronica" in HIDDEN:
+        second_btn = '<a class="btn ghost" href="lugares/esthelm/">Recorrer Esthelm</a>'
+        last_block = ""
+    else:
+        last = by_section["cronica"][0]
+        first_par = md(last.body, root).split("</p>")[0] + "</p>"
+        second_btn = f'<a class="btn ghost" href="cronica/#{last.slug}">Leer la última sesión</a>'
+        last_block = f"""
+<section class="wrap block">
+  <h2 class="br">Última sesión</h2>
+  <article class="lastsession">
+    <h3>Sesión {esc(str(last.meta['label']))}: {esc(last.title)}</h3>
+    <div class="prose">{first_par}</div>
+    <p><a class="ref" href="cronica/#{last.slug}">Seguir leyendo la crónica</a></p>
+  </article>
+</section>
+"""
     body = f"""
 <section class="hero">
   <div class="hero-text">
     <h1>{esc(SITE['headline'])}</h1>
     <p class="lead">{esc(SITE['lead'])}</p>
     <p class="actions"><a class="btn" href="personajes/">Ver a los personajes</a>
-    <a class="btn ghost" href="cronica/#{last.slug}">Leer la última sesión</a></p>
+    {second_btn}</p>
   </div>
   <div class="fan" aria-label="Algunos personajes que habéis conocido">{''.join(fan)}</div>
 </section>
@@ -276,15 +363,7 @@ def page_home():
   <ul class="leads">{''.join(leads)}</ul>
 </section>
 
-<section class="wrap block">
-  <h2 class="br">Última sesión</h2>
-  <article class="lastsession">
-    <h3>Sesión {esc(str(last.meta['label']))}: {esc(last.title)}</h3>
-    <div class="prose">{first_par}</div>
-    <p><a class="ref" href="cronica/#{last.slug}">Seguir leyendo la crónica</a></p>
-  </article>
-</section>
-
+{last_block}
 <section class="wrap block">
   <h2 class="br">Por dónde empezar</h2>
   <ul class="doors">{doors}</ul>
@@ -340,9 +419,12 @@ def page_personaje(e):
     if name:
         art = f'<div class="art big {kind}">{img_tag(name, root, eager=True)}</div>'
     cls = f'<span class="classtag br">{esc(m["class"])}</span>' if m.get("class") else ""
-    sessions = ", ".join(
-        f'<a class="ref" href="{root}cronica/#{s}">Sesión {esc(str(get("cronica", s).meta["label"]))}</a>'
-        for s in m.get("sessions", []))
+    def session_ref(s):
+        label = f'Sesión {esc(str(get("cronica", s).meta["label"]))}'
+        if "cronica" in HIDDEN:
+            return label
+        return f'<a class="ref" href="{root}cronica/#{s}">{label}</a>'
+    sessions = ", ".join(session_ref(s) for s in m.get("sessions", []))
     rows = "".join([
         meta_row("Especie", esc(m.get("race", ""))),
         meta_row("Clase", cls),
@@ -357,9 +439,9 @@ def page_personaje(e):
         story = f'<h2 class="small">Su historia</h2><div class="prose story">{md(m["story"], root)}</div>'
     body = f"""
 <article class="wrap profile">
+  <p class="crumb"><a class="ref" href="{root}personajes/">Personajes</a></p>
   <aside>{art}</aside>
   <div class="profile-main">
-    <p class="crumb"><a class="ref" href="{root}personajes/">Personajes</a></p>
     <h1>{esc(e.title)}</h1>
     <p class="tagline">{esc(m.get("tagline", ""))}</p>
     <dl class="meta">{rows}</dl>
@@ -423,12 +505,13 @@ def page_lugares_index():
     root = "../"
     items = "".join(
         f'<li><a href="{p.slug}/"><span class="d-name">{esc(p.title)}</span>'
-        f'<span class="d-text">{esc(p.meta.get("tagline", ""))}</span></a></li>'
+        f'<span class="d-text">{esc(p.meta.get("tagline", ""))}</span>'
+        f'{"<span class=" + chr(34) + "d-count small" + chr(34) + ">En construcción</span>" if p.meta.get("wip") else ""}</a></li>'
         for p in by_section["lugares"])
     body = f"""
 <section class="wrap page-head">
   <h1>Lugares</h1>
-  <p class="intro">La ciudad y los sitios que usáis. Si algo dice «aún no lo sabéis», nadie lo ha descubierto todavía.</p>
+  <p class="intro">Las ciudades y los sitios que conocéis. Si algo dice «aún no lo sabéis», nadie lo ha descubierto todavía.</p>
   <ul class="doors rows">{items}</ul>
 </section>
 """
@@ -452,6 +535,24 @@ def page_lugar(p):
                         f'<img src="{root}img/{name}" alt="Plano: {esc(pl["label"])}" loading="lazy" '
                         f'width="1400" height="1050"><figcaption>{esc(pl["label"])}</figcaption></figure>')
         plans = f'<h2 class="small">Planos</h2><div class="plans" id="plans">{"".join(figs)}</div>'
+    city_map = ""
+    if m.get("map"):
+        mname = make_webp(m["map"], f"{p.section}-{p.slug}-map.webp", m.get("map_width", 1254))
+        alt = esc(m.get("map_alt", f"Mapa de {p.title}"))
+        city_map = (f'<figure class="citymap"><a href="{root}img/{mname}" target="_blank" rel="noopener">'
+                    f'<img src="{root}img/{mname}" alt="{alt}" width="1254" height="1254" loading="lazy" decoding="async"></a>'
+                    f'<figcaption>Pulsa el mapa para verlo a tamaño completo.</figcaption></figure>')
+    wip = ""
+    if m.get("wip"):
+        text = esc(m.get("wip_text", "Esta página todavía se está preparando. "
+                                     "Muy pronto encontraréis aquí lo que sabéis de este lugar."))
+        if SITE.get("wip_image"):
+            wname = make_webp(SITE["wip_image"], "site-wip.webp", 1200)
+            wip = (f'<figure class="wip-banner"><img src="{root}img/{wname}" '
+                   f'alt="{esc(SITE.get("wip_image_alt", "Página en construcción"))}" '
+                   f'width="1200" height="400" decoding="async"><figcaption>{text}</figcaption></figure>')
+        else:
+            wip = f'<div class="wip"><p class="wip-tag br">En construcción</p><p>{text}</p></div>'
     people = [q for q in by_section["personajes"] if p.slug in q.meta.get("places", [])]
     ppl = ""
     if people:
@@ -462,6 +563,8 @@ def page_lugar(p):
   <p class="crumb"><a class="ref" href="{root}lugares/">Lugares</a></p>
   <h1>{esc(p.title)}</h1>
   <p class="tagline">{esc(m.get("tagline", ""))}</p>
+  {wip}
+  {city_map}
   <div class="prose">{md(p.body, root)}</div>
   {plans}
   {sites}
@@ -560,6 +663,14 @@ def check_forbidden():
                 bad.append(f"{f.relative_to(DIST)}: «{m.group(0)}»")
     if bad:
         fail("marcas de notas del GM en el sitio:\n  " + "\n  ".join(bad))
+    for sec in HIDDEN:
+        if (DIST / sec).exists():
+            fail(f"la sección oculta {sec}/ sigue en dist/ (bórrala a mano o vuelve a construir)")
+        for f in DIST.rglob("*.html"):
+            if re.search(rf'href="[^"]*\b{sec}/', f.read_text(encoding="utf-8")):
+                bad.append(f"{f.relative_to(DIST)}: enlace a {sec}/")
+    if bad:
+        fail("enlaces a secciones ocultas:\n  " + "\n  ".join(bad))
 
 
 def main():
@@ -571,6 +682,7 @@ def main():
             print("aviso: no puedo borrar dist/, sobrescribo los archivos (puede haber restos antiguos)")
     DIST.mkdir(exist_ok=True)
     MEDIA.mkdir(exist_ok=True)
+    make_logo()
     page_home()
     page_personajes_index()
     for e in by_section["personajes"]:
@@ -581,7 +693,8 @@ def main():
     page_lugares_index()
     for e in by_section["lugares"]:
         page_lugar(e)
-    page_cronica()
+    if "cronica" not in HIDDEN:
+        page_cronica()
     page_biblioteca_index()
     for e in by_section["biblioteca"]:
         if not e.meta.get("soon"):
@@ -589,7 +702,7 @@ def main():
     page_404()
     shutil.copytree(STATIC, DIST / "assets", dirs_exist_ok=True)
     (DIST / "img").mkdir(exist_ok=True)
-    for f in MEDIA.glob("*.webp"):
+    for f in [*MEDIA.glob("*.webp"), *MEDIA.glob("site-og.jpg")]:
         shutil.copy(f, DIST / "img" / f.name)
     if (HERE / "audio").is_dir():
         shutil.copytree(HERE / "audio", DIST / "audio", dirs_exist_ok=True)

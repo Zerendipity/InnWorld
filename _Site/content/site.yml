@@ -1,7 +1,18 @@
 title: Crónica de Esthelm
-description: Personajes, grupos, lugares y sesiones de la campaña de Innworld, solo con lo que vuestros personajes saben.
-footer: Cuaderno de campaña de Innworld.
+description: Personajes, grupos y lugares de la campaña de Innworld, solo con lo que vuestros personajes saben.
+footer: The World We Make · Cuaderno de campaña de Innworld.
+# Logo de la campaña (ruta dentro de Assets/). Sale en la cabecera de todas las páginas.
+logo: Logo/The World We Make - logo.png
+logo_alt: The World We Make — The Wandering Inn
+# Dirección pública del sitio, para la vista previa al compartir el enlace.
+base_url: https://zerendipity.github.io/InnWorld/
+# Imagen para las páginas en construcción (wip: true), ruta dentro de Assets/.
+wip_image: MrshaUnderConstruction.png
+wip_image_alt: "Mrsha, con casco y chaleco de obra y un martillo, junto a un cartel que dice: Página en construcción."
 through_session: 9
+# Secciones que no se publican (no salen en el menú ni en la portada).
+# Quita 'cronica' de esta lista cuando la hayas revisado.
+hidden: [cronica]
 headline: Esthelm sigue en pie.
 lead: La ciudad sobrevivió al asedio, pero dos de cada tres edificios siguen en ruinas. Aquí está todo lo que sabéis de la gente, los grupos y los sitios que os rodean.
 hero_cards: [magnolia-reinhart, vessa-galesinger, erin-solstice, frasi, klbkch]
@@ -9,7 +20,7 @@ leads_intro: Lo que tenéis entre manos ahora mismo.
 doors:
   personajes: Quién es quién, con lo que sabéis de cada uno.
   grupos: Gremios, facciones y bandos.
-  lugares: Esthelm, sus sitios y vuestra casa.
+  lugares: Esthelm, Liscor, Celum y vuestra casa.
   cronica: Lo que ha pasado, sesión a sesión.
   biblioteca: Libros sobre el mundo de Innworld, con texto y audio.
 leads:
