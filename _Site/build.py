@@ -230,6 +230,11 @@ def layout(title, body, root, active=None, desc=None, cls=""):
                 f'{logo_img(root, big=home)}<span class="sr">{esc(SITE["title"])}</span></a>')
     else:
         mast = f'<a class="mast" href="{home_href}">{esc(SITE["title"])}</a>'
+    # Estadísticas de visitas con GoatCounter (sin cookies). site.yml → goatcounter: <url>/count
+    stats = ""
+    if SITE.get("goatcounter"):
+        stats = (f'<script data-goatcounter="{esc(SITE["goatcounter"])}" '
+                 'async src="https://gc.zgo.at/count.js"></script>')
     og = ""
     if SITE.get("base_url") and SITE.get("logo"):
         base = SITE["base_url"].rstrip("/") + "/"
@@ -273,6 +278,7 @@ def layout(title, body, root, active=None, desc=None, cls=""):
   <p>{esc(SITE['footer'])} Actualizado tras la sesión {SITE['through_session']}.</p>
 </footer>
 <script src="{root}assets/app.js" defer></script>
+{stats}
 </body>
 </html>
 """

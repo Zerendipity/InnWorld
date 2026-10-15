@@ -6,6 +6,8 @@ logo: Logo/The World We Make - logo.png
 logo_alt: The World We Make — The Wandering Inn
 # Dirección pública del sitio, para la vista previa al compartir el enlace.
 base_url: https://zerendipity.github.io/InnWorld/
+# Estadísticas de visitas (GoatCounter, sin cookies). Borra la línea para quitarlas.
+goatcounter: https://zerendipity.goatcounter.com/count
 # Imagen para las páginas en construcción (wip: true), ruta dentro de Assets/.
 wip_image: MrshaUnderConstruction.png
 wip_image_alt: "Mrsha, con casco y chaleco de obra y un martillo, junto a un cartel que dice: Página en construcción."
