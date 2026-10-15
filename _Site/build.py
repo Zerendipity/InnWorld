@@ -10,6 +10,7 @@ Uso:  python3 _Site/build.py
 Necesita: pip install markdown pyyaml pillow
 """
 import html
+import json
 import re
 import shutil
 import sys
@@ -313,6 +314,21 @@ def page_home():
         name, kind = image_for(e)
         fan.append(f'<a class="c{i}" style="--i:{i}" href="{e.path}" aria-label="{esc(e.title)}">'
                    f'{img_tag(name, root, eager=True)}</a>')
+    # Cartas al azar en cada visita (site.yml → hero_random: true). Las de hero_cards
+    # quedan en el HTML como respaldo si el navegador no ejecuta JavaScript.
+    shuffle = ""
+    if SITE.get("hero_random"):
+        pool = []
+        for e in by_section["personajes"]:
+            if e.meta.get("card"):
+                name, _ = image_for(e)
+                pool.append({"u": e.path, "t": e.title, "i": f"{root}img/{name}"})
+        if len(pool) >= len(fan):
+            data = json.dumps(pool, ensure_ascii=False).replace("</", "<\\/")
+            shuffle = ("<script>(function(){var p=" + data + ",f=document.currentScript.previousElementSibling,"
+                       "a=f.querySelectorAll('a'),i,j,t;for(i=p.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));"
+                       "t=p[i];p[i]=p[j];p[j]=t}for(i=0;i<a.length;i++){a[i].href=p[i].u;"
+                       "a[i].setAttribute('aria-label',p[i].t);a[i].querySelector('img').src=p[i].i}})();</script>")
     leads = []
     for lead in SITE["leads"]:
         rel = []
@@ -354,7 +370,7 @@ def page_home():
     <p class="actions"><a class="btn" href="personajes/">Ver a los personajes</a>
     {second_btn}</p>
   </div>
-  <div class="fan" aria-label="Algunos personajes que habéis conocido">{''.join(fan)}</div>
+  <div class="fan" aria-label="Algunos personajes que habéis conocido">{''.join(fan)}</div>{shuffle}
 </section>
 
 <section class="wrap block">

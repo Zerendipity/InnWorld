@@ -15,6 +15,9 @@ through_session: 9
 hidden: [cronica]
 headline: Esthelm sigue en pie.
 lead: La ciudad sobrevivió al asedio, pero dos de cada tres edificios siguen en ruinas. Aquí está todo lo que sabéis de la gente, los grupos y los sitios que os rodean.
+# Cartas del abanico de la portada: al azar entre todos los personajes con carta.
+# hero_cards solo se usa si el navegador no ejecuta JavaScript.
+hero_random: true
 hero_cards: [magnolia-reinhart, vessa-galesinger, erin-solstice, frasi, klbkch]
 leads_intro: Lo que tenéis entre manos ahora mismo.
 doors:
