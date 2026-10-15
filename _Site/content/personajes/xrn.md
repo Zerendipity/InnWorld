@@ -26,6 +26,5 @@ story: |
 
   Si Klbkch representa el terror de enfrentarse a un maestro de las espadas, Xrn recuerda a Izril una pregunta mucho más inquietante: ¿qué ocurriría si los ejércitos de la Marea Negra también dominaran la magia?
 ---
-Charley habló con ella durante el solsticio. Xrn sabe que Charley miente o se calla algo sobre de dónde viene, y su desconocimiento de datos básicos sobre los Antinium hace que su historia le resulte todavía más rara.
 
 Charley le preguntó cómo lanza magia. Ella explicó que su manera de entender y usar la magia es distinta de la forma estructurada en que la entendería un Aritmántico. También le preguntó si Wistram podría aceptarla; ella se rio.
