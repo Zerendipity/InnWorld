@@ -237,10 +237,13 @@ a.ref:hover { color: var(--ember); }
   align-items: baseline; padding: 1rem 0; border-top: 1px solid var(--line); opacity: .7;
 }
 .doors li.soon .d-name { color: var(--dim); }
-.listen { margin: 1.4rem 0 1rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; max-width: 64ch; }
+.listen { margin: 1.4rem 0 1rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; max-width: none; }
 .listen-label { margin: 0 0 .6rem; font: 700 1.05rem var(--sans); }
 .listen-label span { font-weight: 500; color: var(--dim); }
-.listen audio { width: 100%; }
+.listen audio { width: 100%; display: block; }
+.skips { display: flex; flex-wrap: wrap; gap: .3rem .5rem; margin-top: .7rem; }
+.skips button { background: none; border: 1px solid var(--line); border-radius: 6px; padding: .3rem .7rem; cursor: pointer; color: var(--dim); font: 500 .95rem/1.2 var(--sans); }
+.skips button:hover { color: var(--text); border-color: var(--ember); }
 .byline { margin: .2rem 0 0; font: italic 400 1.05rem var(--serif); color: var(--dim); }
 .toc { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin: 1rem 0 1.8rem; font: 500 1.02rem var(--sans); }
 .book-text { max-width: 66ch; }

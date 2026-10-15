@@ -58,3 +58,26 @@
     show(0);
   }
 })();
+
+// Botones de salto para los audiolibros (más de una hora de audio).
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll(".listen"), function (box) {
+    var audio = box.querySelector("audio");
+    if (!audio) return;
+    var bar = document.createElement("div");
+    bar.className = "skips";
+    [["−5 min", -300], ["−30 s", -30], ["+30 s", 30], ["+5 min", 300]].forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = s[0];
+      b.setAttribute("aria-label", (s[1] < 0 ? "Retroceder " : "Avanzar ") + s[0].slice(1));
+      b.addEventListener("click", function () {
+        var t = audio.currentTime + s[1];
+        if (t < 0) t = 0;
+        if (audio.duration && t > audio.duration) t = audio.duration;
+        audio.currentTime = t;
+      });
+      bar.appendChild(b);
+    });
+    box.appendChild(bar);
+  });
+})();
