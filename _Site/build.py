@@ -647,10 +647,20 @@ def page_libro(b):
 
 
 def page_404():
-    body = ('<section class="wrap page-head"><h1>Esta página no existe</h1>'
-            '<p class="intro">Puede que el enlace esté mal escrito o que la ficha aún no se haya publicado. '
-            '<a class="ref" href="./">Volver al inicio</a>.</p></section>')
-    write("404.html", layout("Página no encontrada", body, ""))
+    # GitHub Pages sirve 404.html en cualquier ruta que no exista, así que aquí los
+    # enlaces tienen que ser absolutos (p. ej. /InnWorld/assets/style.css).
+    from urllib.parse import urlparse
+    root = urlparse(SITE["base_url"]).path.rstrip("/") + "/" if SITE.get("base_url") else ""
+    banner = ""
+    if SITE.get("wip_image"):
+        wname = make_webp(SITE["wip_image"], "site-wip.webp", 1200)
+        banner = (f'<figure class="wip-banner"><img src="{root}img/{wname}" '
+                  f'alt="{esc(SITE.get("wip_image_alt", "Página en construcción"))}" '
+                  f'width="1200" height="400" decoding="async"></figure>')
+    body = (f'<section class="wrap page-head"><h1>Esta página no existe</h1>{banner}'
+            '<p class="intro">Puede que el enlace esté mal escrito o que la página aún no se haya publicado. '
+            f'<a class="ref" href="{root or "./"}">Volver al inicio</a>.</p></section>')
+    write("404.html", layout("Página no encontrada", body, root))
 
 
 # ---------------------------------------------------------------- comprobación
