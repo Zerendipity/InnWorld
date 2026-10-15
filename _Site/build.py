@@ -32,6 +32,7 @@ SECTIONS = {
     "grupos": "Grupos",
     "lugares": "Lugares",
     "cronica": "Crónica",
+    "biblioteca": "Biblioteca",
 }
 
 FORBIDDEN = [
@@ -86,6 +87,7 @@ for s in ("personajes", "grupos"):
     by_section[s].sort(key=lambda e: sort_key(e.title))
 by_section["lugares"].sort(key=lambda e: (e.meta.get("order", 99), sort_key(e.title)))
 by_section["cronica"].sort(key=lambda e: e.meta.get("order", 0), reverse=True)
+by_section["biblioteca"].sort(key=lambda e: e.meta.get("order", 99))
 
 LOOKUP = {}
 for e in ENTRIES.values():
@@ -483,6 +485,58 @@ def page_cronica():
     write("cronica/index.html", layout("Crónica", body, root, "cronica", "Resumen de cada sesión."))
 
 
+def page_biblioteca_index():
+    root = "../"
+    items = []
+    for b in by_section["biblioteca"]:
+        if b.meta.get("soon"):
+            items.append(f'<li class="soon"><div class="row"><span class="d-name">{esc(b.title)}</span>'
+                         f'<span class="d-text">{esc(b.meta.get("tagline", ""))}</span>'
+                         f'<span class="d-count small">Próximamente</span></div></li>')
+        else:
+            extra = "Texto" + (f" y audio · {b.meta['audio_length']}" if b.meta.get("audio") else "")
+            items.append(f'<li><a href="{b.slug}/"><span class="d-name">{esc(b.title)}</span>'
+                         f'<span class="d-text">{esc(b.meta.get("tagline", ""))}</span>'
+                         f'<span class="d-count small">{esc(extra)}</span></a></li>')
+    body = f"""
+<section class="wrap page-head">
+  <h1>Biblioteca</h1>
+  <p class="intro">Lecturas de fondo sobre el mundo de Innworld, con su texto completo y, cuando existe, el audio para escucharlas.</p>
+  <ul class="doors rows">{''.join(items)}</ul>
+</section>
+"""
+    write("biblioteca/index.html", layout("Biblioteca", body, root, "biblioteca", "Libros sobre el mundo de Innworld."))
+
+
+def page_libro(b):
+    root = "../../"
+    m = b.meta
+    player = ""
+    if m.get("audio"):
+        player = (f'<div class="listen"><p class="listen-label">Escuchar el libro entero'
+                  f'<span> · {esc(m.get("audio_length", ""))}</span></p>'
+                  f'<audio controls preload="none" src="{root}audio/{esc(m["audio"])}">'
+                  f'Tu navegador no puede reproducir el audio.</audio></div>')
+    heads = re.findall(r"^## (.+?) \{#([\w-]+)\}\s*$", b.body, re.M)
+    toc = ""
+    if heads:
+        toc = ('<nav class="toc" aria-label="Contenido del libro">' +
+               "".join(f'<a class="ref" href="#{a}">{esc(t)}</a>' for t, a in heads) + "</nav>")
+    author = f'<p class="byline">Crónica de {esc(m["author"])}</p>' if m.get("author") else ""
+    body = f"""
+<article class="wrap prose-page book">
+  <p class="crumb"><a class="ref" href="{root}biblioteca/">Biblioteca</a></p>
+  <h1>{esc(b.title)}</h1>
+  <p class="tagline">{esc(m.get("tagline", ""))}</p>
+  {author}
+  {player}
+  {toc}
+  <div class="prose book-text">{md(b.body, root)}</div>
+</article>
+"""
+    write(f"{b.path}index.html", layout(b.title, body, root, "biblioteca", m.get("tagline")))
+
+
 def page_404():
     body = ('<section class="wrap page-head"><h1>Esta página no existe</h1>'
             '<p class="intro">Puede que el enlace esté mal escrito o que la ficha aún no se haya publicado. '
@@ -522,11 +576,17 @@ def main():
     for e in by_section["lugares"]:
         page_lugar(e)
     page_cronica()
+    page_biblioteca_index()
+    for e in by_section["biblioteca"]:
+        if not e.meta.get("soon"):
+            page_libro(e)
     page_404()
     shutil.copytree(STATIC, DIST / "assets", dirs_exist_ok=True)
     (DIST / "img").mkdir(exist_ok=True)
     for f in MEDIA.glob("*.webp"):
         shutil.copy(f, DIST / "img" / f.name)
+    if (HERE / "audio").is_dir():
+        shutil.copytree(HERE / "audio", DIST / "audio", dirs_exist_ok=True)
     (DIST / ".nojekyll").write_text("")
     (DIST / "robots.txt").write_text("User-agent: *\nDisallow: /\n")
     check_forbidden()

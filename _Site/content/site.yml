@@ -11,6 +11,7 @@ doors:
   grupos: Gremios, facciones y bandos.
   lugares: Esthelm, sus sitios y vuestra casa.
   cronica: Lo que ha pasado, sesión a sesión.
+  biblioteca: Libros sobre el mundo de Innworld, con texto y audio.
 leads:
   - title: La granja a las afueras
     text: Un registro nuevo de la Guardia dice que hay suministros guardados en una granja fuera de Esthelm, y los propios guardias lo encontraron raro. Terminasteis la última sesión de camino a investigarla.
