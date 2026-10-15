@@ -4,7 +4,7 @@ tagline: El obrero de alcantarillas con voz de bajo profundo que insiste en que 
 role: Operario de alcantarillas y bajo
 class: Sewer Worker
 card: "NPC Cards/set 4/Garrick Gravel Morn.png"
-groups: [coro-de-sonia]
+groups: [bardos-de-esthelm]
 places: [esthelm]
 met_by: [Sonia]
 sessions: [sesion-5, sesion-8]

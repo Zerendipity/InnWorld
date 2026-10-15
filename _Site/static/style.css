@@ -256,3 +256,7 @@ a.ref:hover { color: var(--ember); }
 @media (max-width: 700px) {
   .doors li.soon .row { grid-template-columns: 1fr; }
 }
+
+/* ---- imagen de grupo ---- */
+.group-art { margin: 1.4rem 0 1.6rem; max-width: 640px; }
+.group-art img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); box-shadow: var(--shadow); }

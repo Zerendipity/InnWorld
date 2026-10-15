@@ -24,7 +24,7 @@ leads:
     related: [personajes/redhat]
   - title: Cristales de canción
     text: Telisa pagará la importación de cristales de Wistram para que Sonia grabe canciones, y se quedará con parte de los beneficios. Aún no hay cantidades ni plazos cerrados, y no ha llegado ningún envío.
-    related: [personajes/telisa, grupos/coro-de-sonia]
+    related: [personajes/telisa, grupos/bardos-de-esthelm]
   - title: La clave con BlackMage
     text: Charley y BlackMage, en Wistram, quieren montar un cifrado sencillo con un número primo y claves pública y privada. De momento es solo un acuerdo; no hay algoritmo ni mensajes cifrados.
     related: [personajes/telisa]

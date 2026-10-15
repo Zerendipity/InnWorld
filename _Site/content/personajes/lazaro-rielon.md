@@ -1,10 +1,10 @@
 ---
 title: Lázaro Rielon
-tagline: El centro carismático del coro de Sonia.
+tagline: El centro carismático de los bardos de Esthelm.
 role: Bardo y barítono-tenor
 class: Bard
 card: "NPC Cards/Set 5/Lázaro Rielon.png"
-groups: [coro-de-sonia]
+groups: [bardos-de-esthelm]
 places: [esthelm]
 met_by: [Sonia]
 sessions: [sesion-5]

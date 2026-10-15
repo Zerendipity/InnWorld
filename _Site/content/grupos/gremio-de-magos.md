@@ -1,8 +1,6 @@
 ---
 title: Gremio de Magos
 tagline: El gremio de magia de la ciudad, con Telisa al frente.
-unknown:
-  - Dónde está su sede y en qué estado quedó tras el asedio.
 ---
 Institución mágica importante de Esthelm. [[Telisa]] es su maestra y la profesora de Charley.
 

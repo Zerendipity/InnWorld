@@ -4,7 +4,7 @@ tagline: El violinista pícaro que aprende cualquier melodía de oído.
 role: Violinista y barítono grave
 class: Bard
 card: "NPC Cards/Set 5/Iven Varn.png"
-groups: [coro-de-sonia]
+groups: [bardos-de-esthelm]
 places: [esthelm]
 met_by: [Sonia]
 sessions: [sesion-5]

@@ -400,11 +400,17 @@ def page_grupo(g):
     if members:
         mem = ('<h2 class="small">Personas</h2><div class="grid mini">' +
                "".join(tile(p, root) for p in members) + "</div>")
+    fig = ""
+    if g.meta.get("image"):
+        iname = make_webp(g.meta["image"], f"{g.section}-{g.slug}-image.webp", 1000)
+        fig = (f'<figure class="group-art"><img src="{root}img/{iname}" alt="{esc(g.meta.get("image_alt", ""))}" '
+               f'width="1000" height="750" loading="lazy" decoding="async"></figure>')
     body = f"""
 <article class="wrap prose-page">
   <p class="crumb"><a class="ref" href="{root}grupos/">Grupos</a></p>
   <h1>{esc(g.title)}</h1>
   <p class="tagline">{esc(g.meta.get("tagline", ""))}</p>
+  {fig}
   <div class="prose">{md(g.body, root)}</div>
   {gaps_html(g.meta, root)}
   {mem}
